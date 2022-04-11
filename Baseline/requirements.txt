@@ -1,3 +1,4 @@
+pytorch-lightning==1.6.0
 wandb==0.12.14
 editdistance==0.5.3
 fastapi==0.75.1
@@ -7,3 +8,4 @@ hydra-core==1.1.1
 python-multipart==0.0.5
 omegaconf==2.1.1
 albumentations==1.1.0
+opencv-python-headless==4.1.2.30
