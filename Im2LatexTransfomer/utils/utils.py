@@ -152,3 +152,17 @@ def get_scheduler(scheduler):
 
 def num_model_params(model):
     return sum([p.numel() for p in model.parameters()])
+
+
+def minmax_size(image, max_dimensions=None, min_dimensions=None):
+    if max_dimensions is not None:
+        ratios = [a/b for a, b in zip(image.size, max_dimensions)]
+        if any([r > 1 for r in ratios]):
+            size = np.array(image.size)//max(ratios)
+            image = image.resize(size.astype(int), Image.BILINEAR)
+    if min_dimensions is not None:
+        if any([s < min_dimensions[i] for i, s in enumerate(image.size)]):
+            padded_im = Image.new('L', min_dimensions, 255)
+            padded_im.paste(image, image.getbbox())
+            image = padded_im
+    return image
